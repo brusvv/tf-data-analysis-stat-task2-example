@@ -6,12 +6,13 @@ from scipy.stats import norm
 
 chat_id = 5437824033 # Ваш chat ID, не меняйте название переменной
 
-def solution(p: float, x: np.array) -> tuple:
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
-    alpha = 1 - p
-    loc = x.mean()
-    scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    return 2 * (loc + 0.043 + scale * norm.ppf(alpha / 2)) , \
-           2 * (loc + 0.043 + scale * norm.ppf(1 - alpha / 2))
+def solution(x: np.array) -> float:
+  t = 56
+  n = len(x)
+  mu = 0
+  sigma = 1
+
+  x_error = np.random.normal(mu, sigma, n)
+  a = 2 * x_error/ t**2
+
+  return a.mean()
