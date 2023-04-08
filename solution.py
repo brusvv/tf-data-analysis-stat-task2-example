@@ -2,18 +2,12 @@ import pandas as pd
 import numpy as np
 
 from scipy.stats import norm
-from scipy.stats import t
+from scipy.stats import chi2
 
-chat_id = 5437824033
+
+chat_id = 5437824033 # Ваш chat ID, не меняйте название переменной
 
 def solution(p: float, x: np.array) -> tuple:
-    alpha = p
-    measurements = x
-    n = measurements.size
-    x_mean = np.mean(measurements)
-    s = np.sqrt(np.var(measurements, ddof=1))
-    t_alpha_2 = t.ppf(1 - alpha/2, df=n-1)
-    delta = t_alpha_2 * s / np.sqrt(n)
-    left_boundary = x_mean - delta
-    right_boundary = x_mean + delta
-    return (left_boundary, right_boundary)
+    length = len(x)
+    return np.sqrt(sum(x ** 2) / (56 * chi2.ppf((1 + p) / 2, df = 2 * length))), \
+           np.sqrt(sum(x ** 2) / (56 * chi2.ppf((1 - p) / 2, df = 2 * length)))
